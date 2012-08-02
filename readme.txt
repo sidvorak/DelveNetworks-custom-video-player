@@ -1,12 +1,12 @@
-"LEED Platinum Brewery, Winery & Food Pilot Facility: A Recipe for Success at UC Davis" Video Tour Documentation
+DelveNetworks Custom Video Player Documentation
 
 Description
 ================================================
-The BWF video tour provides videos and supporting documents describing the facilities path to LEED Platinum status
+The javascript based video player takes a Delve Networks channelID and then displays the videos in an integrated video player.  
 
 Installation
 ================================================
-Step 1: In the <head> section of the HTML paeg, link to the JQuery UI css file, JQuery and JQuery UI scripts provided by Google. 
+Step 1: In the <head> section of the HTML page, link to the JQuery UI css file, JQuery and JQuery UI scripts provided by Google. 
 	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
