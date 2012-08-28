@@ -1,10 +1,19 @@
+var channelID="1a1d7adbb87541acbe1a8987ff0c70e7";
+var playerID="limelight_player_779756";
+var media_description="";
+var media_resources="";
+var media_title="";
+var started=false;
+var intro_title="Introduction";
+var intro_description="<p>Introduction text</p>"
+var player_html='<h1 id="title">&nbsp;</h1><div id="video"><div id="side_panel"><div id="tabs"><ul><li><a href="#tabs-1">Description</a></li></ul><div id="tabs-1" class="tab"></div></div></div><script src="http://assets.delvenetworks.com/player/embed.js"></script><object type="application/x-shockwave-flash" id="'+playerID+'" name="'+playerID+'" class="LimelightEmbeddedPlayerFlash" width="585" height="380" data="http://assets.delvenetworks.com/player/loader.swf"><param name="movie" value="http://assets.delvenetworks.com/player/loader.swf"/><param name="wmode" value="opaque"/><param name="allowScriptAccess" value="always"/><param name="allowFullScreen" value="true"/><param name="flashVars" value="channelId='+ channelID+'&playerForm=1e1899f751af4b83a9a44205f1ffad4c&deepLink=true&defaultQuality=1200"/></object></div><div id="playlist"><div id="playlist_content"></div></div>';
 $(document).ready(function(){
 	$("span.LimelightEmbeddedPlayer").html(player_html);
 	$("#tabs").tabs();
 	});
 function delvePlayerCallback (playerId, eventName, data)
 {
-  var id = "limelight_player_779756";
+  var id = playerID;
   var started=0;
   if (eventName == 'onPlayerLoad' && (DelvePlayer.getPlayers() == null || DelvePlayer.getPlayers().length == 0)) 
   {
@@ -14,9 +23,7 @@ function delvePlayerCallback (playerId, eventName, data)
   switch(eventName)
   {
 		case 'onChannelLoad':
-			$("#imageOverlay").show();
 			$('#tabs-1').html("<h1>"+intro_title+"</h1>"+intro_description).show();
-			$('#tabs-2').html(add_resources).show();
 			$("h1#title").html(data.title);
 			doPlaylist(data);
 			var mid=getParameterByName("mediaId");
@@ -28,19 +35,15 @@ function delvePlayerCallback (playerId, eventName, data)
 			if(data.positionInMilliseconds > 100 && window.started==false){
 				window.started=true;
 			 	$('#tabs-1').html("<h1>"+media_title+"</h1>"+media_description).show();
-				$('#tabs-2').html(media_resources).show();
-				$('#imageOverlay').fadeOut('slow');
 			}
       
       	break;
 		case 'onMediaLoad':
-	   		media_description=descriptions[data.refId-1][0] + descriptions[data.refId-1][2];
-			media_resources=descriptions[data.refId-1][1] + add_resources;
+	   		media_description=data.description;
 			media_title=data.title;
 			started=false;
 	  	break;
     	case 'onMediaComplete':
-      		$('#imageOverlay').fadeIn();
 			$('#tabs-1').html("<h1>"+intro_title+"</h1>"+intro_description).show();
 			$('.play_status').remove();
 			window.started=false;
